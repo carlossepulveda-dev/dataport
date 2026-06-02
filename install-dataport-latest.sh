@@ -5,6 +5,8 @@ REPO="carlossepulveda-dev/dataport"
 PACKAGE="dataport-latest.deb"
 SERVICE_NAME="dataport.service"
 
+APT_LOCK_TIMEOUT=300
+
 echo "Downloading latest DataPort release..."
 
 DOWNLOAD_URL=$(curl -s "https://api.github.com/repos/${REPO}/releases/latest" \
@@ -35,13 +37,18 @@ rm -f "$PACKAGE"
 
 wget -O "$PACKAGE" "$DOWNLOAD_URL"
 
-echo "Installing DataPort..."
+echo "Installing DataPort package..."
 
-sudo apt update
-sudo apt install -y "./$PACKAGE"
+sudo apt-get -o DPkg::Lock::Timeout="${APT_LOCK_TIMEOUT}" update
+sudo apt-get -o DPkg::Lock::Timeout="${APT_LOCK_TIMEOUT}" install -y "./$PACKAGE"
+
+echo "Running DataPort app-local setup..."
+
+sudo /opt/dataport/install.sh
 
 echo "Restarting DataPort service..."
 
+sudo systemctl daemon-reload || true
 sudo systemctl restart "$SERVICE_NAME" || true
 
 echo "Cleaning up..."

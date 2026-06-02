@@ -2,16 +2,40 @@
 
 DataPort Installer Repository.
 
-## Install
+## Install or Update DataPort
+
+Run the following command on the Raspberry Pi:
 
 ```bash
-wget https://github.com/carlossepulveda-dev/dataport/releases/latest/download/dataport_1.0.0_arm64.deb
-
-sudo apt install ./dataport_1.0.0_arm64.deb
+curl -sSL https://raw.githubusercontent.com/carlossepulveda-dev/dataport/main/install-dataport-latest.sh | bash
 ```
+
+This command automatically:
+
+* Downloads the latest DataPort release
+* Installs or upgrades DataPort
+* Updates to the newest available version
 
 ## Verify Service
 
 ```bash
 systemctl status dataport
 ```
+
+## Access DataPort
+
+```text
+https://dataport.local
+```
+
+or
+
+```text
+https://dt5pi.local
+```
+
+## Latest Release
+
+Browse all releases:
+
+https://github.com/carlossepulveda-dev/dataport/releases

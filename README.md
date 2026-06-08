@@ -28,10 +28,10 @@ systemctl status dataport
 https://dataport.local
 ```
 
-or
+Download Root Certificate to validate SSL
 
 ```text
-https://dt5pi.local
+http://dataport.local/downloads/DataPortRootCA.crt
 ```
 
 ## Latest Release
